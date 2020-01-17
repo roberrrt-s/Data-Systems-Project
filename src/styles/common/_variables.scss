@@ -1,0 +1,50 @@
+// Import Bootstrap functions
+@import "~bootstrap/scss/bootstrap";
+
+// Fluid font-size
+$font-size-fluid  : 1.35vw;  // Set on html: Tweak this value for global sizing
+$font-size-min    : 14.5px; // Set on html
+$font-size-max    : 21px; // Set on html
+$font-size-base   : 1rem; // Set on body
+
+// Default colors
+$white            : #fff;
+$light            : #ececec;
+$dark             : #121212;
+$black            : #000;
+
+// Monokai
+$m-red            : #ff6188;
+$m-orange         : #fc9867;
+$m-yellow         : #ffd866;
+$m-green          : #a9dc76;
+$m-blue           : #78dce8;
+$m-purple         : #ab9df2;
+
+// Gutters and padding
+$grid-gutter-width: $font-size-base * 1.125;
+$container-padding: $font-size-base * 3.33;
+
+// Font weights
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+$font-weight-light: 300;
+
+// Font sizes;
+$h1-font-size: $font-size-base * 1.2;
+$h2-font-size: $font-size-base * 1.1;
+
+$h1-font-weight: $font-weight-bold;
+$h2-font-weight: $font-weight-normal;
+
+$font-size-menu: $font-size-base * 0.89;
+$font-size-small: $font-size-base * 0.69;
+
+// Defaulted dimensions
+$header-height    : 8vh;
+$header-min-height: 5rem;
+
+
+// Transitions
+$trans-fast: .25s;
+$trans-mid: .5s;

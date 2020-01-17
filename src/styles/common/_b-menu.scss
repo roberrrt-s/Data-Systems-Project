@@ -1,0 +1,40 @@
+.b-menu {
+	@include make-col-ready();
+	@include make-col(12);
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	h1 {
+		color: $white;
+		font-size: 1.5rem;
+	}
+
+	&__item {
+
+		a {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			color: $light;
+			padding: ($grid-gutter-width / 2) $grid-gutter-width ($grid-gutter-width / 2) ($grid-gutter-width / 2);
+
+			&.active {
+				color: $white;
+				font-weight: 700;
+			}
+
+			@include hover-focus {
+				color: $white;
+			}
+		}
+	}
+}

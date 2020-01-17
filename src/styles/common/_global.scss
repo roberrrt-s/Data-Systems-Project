@@ -1,0 +1,66 @@
+html {
+	@include responsive-font($font-size-fluid, $font-size-min, $font-size-max, $font-size-min);
+}
+
+body {
+	font-size: $font-size-base;
+}
+
+html,
+body,
+#app-container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100%;
+}
+
+h1 {
+	font-size: $h1-font-size;
+	font-weight: $h1-font-weight;
+}
+
+h2 {
+	font-size: $h2-font-size;
+	font-weight: $h2-font-weight;
+}
+
+a {
+	color: $m-blue;
+	transition: all $trans-fast ease;
+
+	@include hover-focus {
+		color: darken($m-blue, 25%);
+		text-decoration: none;
+	}
+}
+
+.subrow {
+	padding: 1rem;
+}
+
+.b-buttons {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+label {
+	display: flex;
+	align-items: center;
+	margin-right: 1rem;
+	cursor: pointer;
+	float: left;
+
+	input {
+		margin-right: .3rem;
+	}
+}
+
+.LazyLoad {
+	text-align: center;
+
+	img {
+		width: auto;
+		max-height: 150px;
+	}
+}

@@ -1,0 +1,43 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	],
+	"env": {
+		"node": true,
+		"es6": true,
+		"amd": true,
+		"browser": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"classes": true,
+			"globalReturn": true,
+			"generators": false,
+			"objectLiteralDuplicateProperties": false,
+			"jsx": true
+		}
+	},
+	"plugins": [
+		"import",
+		"react"
+	],
+	"settings": {
+		"import/core-modules": [],
+		"import/ignore": [
+			"node_modules",
+			"\\.(coffee|scss|css|less|hbs|svg|json)$"
+		],
+		"react": {
+			"version": "detect"
+		}
+	},
+	"rules": {
+		"react/display-name": [0],
+		"comma-dangle": "off",
+		"no-console": "off",
+		"no-unused-vars": "warn"
+	}
+}

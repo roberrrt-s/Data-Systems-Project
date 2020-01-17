@@ -1,0 +1,59 @@
+{
+	"extends": "stylelint-config-recommended",
+	"plugins": [
+		"stylelint-selector-bem-pattern"
+	],
+	"ignoreFiles": ["**/*.js"],
+	"rules": {
+		"block-opening-brace-space-before": "always",
+		"selector-list-comma-newline-after": "always",
+		"no-descending-specificity": null,
+		"indentation": "tab",
+		"no-empty-source": null,
+		"max-empty-lines": 2,
+		"number-leading-zero": "never",
+		"at-rule-empty-line-before": [
+			"always", {
+				"except": [
+					"blockless-after-same-name-blockless",
+					"first-nested"
+				],
+				"ignore": [
+					"after-comment"
+				]
+			}
+		],
+		"declaration-block-trailing-semicolon": "always",
+		"declaration-empty-line-before": [
+			"always", {
+				"except": [
+					"after-declaration",
+					"first-nested"
+				]
+			}
+		],
+		"at-rule-no-unknown": [
+			true,
+			"ignoreAtRules": [
+				"extend",
+				"at-root",
+				"debug",
+				"warn",
+				"error",
+				"if",
+				"else",
+				"for",
+				"each",
+				"while",
+				"mixin",
+				"include",
+				"content",
+				"return",
+				"function"
+			]
+		],
+		"plugin/selector-bem-pattern": {
+			"preset": "bem"
+		}
+	}
+}
