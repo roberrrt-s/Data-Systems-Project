@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UserTable from 'scripts/blocks/UserTable';
+import Users from 'scripts/blocks/Users';
 
 class Overview extends Component {
 
@@ -11,7 +11,7 @@ class Overview extends Component {
 	getUsers() {
 		if(this.props.data && this.props.data.length) {
 			return (
-				<UserTable users={this.props.data} />
+				<Users users={this.props.data} />
 			)
 		}
 		else {

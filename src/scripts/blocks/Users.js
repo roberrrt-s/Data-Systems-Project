@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-class UserTable extends Component {
+class Users extends Component {
 	constructor(props) {
 		super(props)
 
@@ -28,6 +28,9 @@ class UserTable extends Component {
 				show: true,
 				sortable: true,
 				filterable: true,
+				Cell: content => {
+					return <Link to={`user/${content.row.user_id}`}>{content.row.user_name}</Link>
+				},
 				filterMethod: (filter, row) => {
 					return row.user_name && row.user_name.toLowerCase().indexOf(filter.value.toLowerCase()) >=0;
 				}
@@ -71,8 +74,8 @@ class UserTable extends Component {
 	}
 }
 
-export default UserTable;
+export default Users;
 
-UserTable.propTypes = {
+Users.propTypes = {
 	users: PropTypes.array
 }

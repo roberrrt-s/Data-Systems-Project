@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostTable from 'scripts/blocks/PostTable';
+import Posts from 'scripts/blocks/Posts';
 
 class Account extends Component {
 
@@ -13,10 +13,8 @@ class Account extends Component {
 			let userObject = this.props.data.find(obj => obj.user_id == this.props.match.params.id)
 
 			if(userObject) {
-				console.log(userObject)
-
 				return (
-					<PostTable user={userObject} />
+					<Posts user={userObject} />
 				)
 		}
 		else {
