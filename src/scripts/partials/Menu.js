@@ -5,7 +5,7 @@ class Menu extends Component {
 	render() {
 		return (
 			<div className="b-menu">
-				<h1><Link to="/">DSP Data Explorer</Link></h1>
+				<h1><Link to="/">Iron March database explorer</Link></h1>
 			</div>
 		)
 	}
