@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import Home from 'scripts/screens/Home';
 import Account from 'scripts/screens/Account';
@@ -14,9 +15,9 @@ class Main extends Component {
 		return (
 			<div className="l-main">
 				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route exact path="/overview/" component={Overview} />
-					<Route exact path="/user/" component={Account} />
+					<Route exact path="/" render={(props) => <Home {...props} data={this.props.data} />} />
+					<Route exact path="/overview" render={(props) => <Overview {...props} data={this.props.data} />} />
+					<Route path="/user/:id" render={(props) => <Account {...props} data={this.props.data} />}  />
 				</Switch>
 			</div>
 		)
@@ -24,3 +25,7 @@ class Main extends Component {
 }
 
 export default Main;
+
+Main.propTypes = {
+	data: PropTypes.array
+}

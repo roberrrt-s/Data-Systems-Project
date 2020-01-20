@@ -12,6 +12,7 @@ class App extends Component {
 		super();
 
 		this.state = {};
+		this.state.data = [];
 		this.importData();
 	}
 
@@ -22,8 +23,6 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.state);
-
 		return (
 			<div className="l-app">
 				<HashRouter>
@@ -31,7 +30,7 @@ class App extends Component {
 						<Menu />
 					</div>
 
-					<Main />
+					<Main data={this.state.data} />
 				</HashRouter>
 			</div>
 		);
