@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LineChart } from 'reaviz';
+import {
+	LineChart,
+	LineSeries,
+	TooltipArea,
+} from 'reaviz';
 
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -11,8 +15,14 @@ class Posts extends Component {
 		super(props)
 
 		this.state = {
-			plotData: [],
-			parsedData: [],
+			allData: [{
+				key: "All posts",
+				data: []
+			},
+			{
+				key: "Hate posts",
+				data: []
+			}],
 			columns: [{
 				Header: 'Date',
 				accessor: 'post_date',
@@ -59,22 +69,39 @@ class Posts extends Component {
 			}]
 		}
 
-		const formatter = new Intl.DateTimeFormat('en', { month: 'long' });
-
 		this.props.user.posts.map(el => {
 			const date = new Date(el.post_date * 1000);
-			let month = formatter.format(date);
-			let year = new Date(date).getFullYear();
+			let month = date.getMonth();
+			let year = date.getFullYear();
 
-			this.state.plotData.push(
+			this.state.allData[0].data.push(
 				{
-					key: `${month}, ${year}`,
+					key: new Date(year, month)
 				}
 			)
+
+			if(el.hate) {
+				this.state.allData[1].data.push(
+					{
+						key: new Date(year, month)
+					}
+				)
+			}
 		})
 
-		this.state.parsedData = this.state.plotData.reduce((acc, item) => {
-			let found = acc.find(obj => obj.key === item.key)
+		this.state.allData[0].data = this.mergeObjects(this.state.allData[0].data);
+		this.state.allData[1].data = this.mergeObjects(this.state.allData[1].data);
+
+		this.state.allData[0].data = this.sortObjects(this.state.allData[0].data);
+		this.state.allData[1].data = this.sortObjects(this.state.allData[1].data);
+
+		console.log(this.state.allData)
+	}
+
+
+	mergeObjects(arr) {
+		return arr.reduce((acc, item) => {
+			let found = acc.find(obj => obj.key.toString() === item.key.toString())
 				if (typeof found === "undefined") {
 					item.data = 1
 					acc.push(item);
@@ -86,10 +113,32 @@ class Posts extends Component {
 		[]);
 	}
 
+	sortObjects(arr) {
+		return arr.sort((a, b) => {
+			return new Date(a.key) - new Date(b.key);
+		});
+	}
+
 	render() {
 		return (
 			<React.Fragment>
-				<LineChart width={800} height={300} data={this.state.parsedData} />
+				<div className="b-chart">
+					<LineChart
+						width={1000}
+						height={500}
+						data={this.state.allData}
+						discrete={true}
+						series={
+							<LineSeries
+								type="grouped"
+								colorScheme={["#78dce8", "#fc9867"]}
+								tooltip={
+									<TooltipArea disabled={true}/>
+								}
+							/>
+						}
+					/>
+				</div>
 				<ReactTable
 					showPagination={true}
 					data={this.props.user.posts}

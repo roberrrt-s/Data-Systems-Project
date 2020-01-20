@@ -1,0 +1,8 @@
+.b-chart {
+	width: 100%;
+	text-align: center;
+
+	> svg {
+		width: auto !important;
+	}
+}
