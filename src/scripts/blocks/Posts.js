@@ -4,6 +4,8 @@ import {
 	LineChart,
 	LineSeries,
 	TooltipArea,
+	PieChart,
+	PieArcSeries
 } from 'reaviz';
 
 import ReactTable from "react-table";
@@ -15,13 +17,21 @@ class Posts extends Component {
 		super(props)
 
 		this.state = {
-			allData: [{
+			allLineData: [{
 				key: "All posts",
 				data: []
 			},
 			{
 				key: "Hate posts",
 				data: []
+			}],
+			allPieData: [{
+				key: "Not hateful",
+				data: 0
+			},
+			{
+				key: "Hateful",
+				data: 0
 			}],
 			columns: [{
 				Header: 'Date',
@@ -74,28 +84,31 @@ class Posts extends Component {
 			let month = date.getMonth();
 			let year = date.getFullYear();
 
-			this.state.allData[0].data.push(
+			this.state.allLineData[0].data.push(
 				{
 					key: new Date(year, month)
 				}
 			)
 
 			if(el.hate) {
-				this.state.allData[1].data.push(
+				this.state.allLineData[1].data.push(
 					{
 						key: new Date(year, month)
 					}
 				)
+
+				this.state.allPieData[1].data++
 			}
 		})
 
-		this.state.allData[0].data = this.mergeObjects(this.state.allData[0].data);
-		this.state.allData[1].data = this.mergeObjects(this.state.allData[1].data);
+		this.state.allPieData[0].data = (this.props.user.posts.length + 1) - this.state.allPieData[1].data
 
-		this.state.allData[0].data = this.sortObjects(this.state.allData[0].data);
-		this.state.allData[1].data = this.sortObjects(this.state.allData[1].data);
+		this.state.allLineData[0].data = this.mergeObjects(this.state.allLineData[0].data);
+		this.state.allLineData[1].data = this.mergeObjects(this.state.allLineData[1].data);
+		this.state.allLineData[1].data = this.addMissingDates(this.state.allLineData[0].data, this.state.allLineData[1].data);
 
-		console.log(this.state.allData)
+		this.state.allLineData[0].data = this.sortObjects(this.state.allLineData[0].data);
+		this.state.allLineData[1].data = this.sortObjects(this.state.allLineData[1].data);
 	}
 
 
@@ -119,25 +132,55 @@ class Posts extends Component {
 		});
 	}
 
+	addMissingDates(full, missing) {
+		if(missing.length !== full.length) {
+			full.map(el => {
+				let found = missing.find(obj => obj.key.toString() === el.key.toString())
+				if(typeof found === "undefined") {
+					missing.push({
+						key: el.key,
+						data: 0
+					})
+				}
+			})
+			return missing;
+		} else {
+			return missing;
+		}
+	}
+
 	render() {
 		return (
 			<React.Fragment>
 				<div className="b-chart">
-					<LineChart
-						width={1000}
-						height={500}
-						data={this.state.allData}
-						discrete={true}
-						series={
-							<LineSeries
-								type="grouped"
-								colorScheme={["#78dce8", "#fc9867"]}
-								tooltip={
-									<TooltipArea disabled={true}/>
-								}
-							/>
-						}
-					/>
+					<div className="b-chart__line">
+						<LineChart
+							data={this.state.allLineData}
+							discrete={true}
+							series={
+								<LineSeries
+									type="grouped"
+									colorScheme={["#78dce8", "#fc9867"]}
+									tooltip={
+										<TooltipArea disabled={true} />
+									}
+								/>
+							}
+						/>
+					</div>
+					<div className="b-chart__pie">
+						<PieChart
+							data={this.state.allPieData}
+							series={
+								<PieArcSeries
+									colorScheme={["#78dce8", "#fc9867"]}
+									tooltip={
+										<TooltipArea disabled={true} />
+									}
+								/>
+							}
+						/>
+					</div>
 				</div>
 				<ReactTable
 					showPagination={true}

@@ -1,8 +1,28 @@
 .b-chart {
-	width: 100%;
-	text-align: center;
+	display: flex;
+	flex-flow: row wrap;
 
-	> svg {
-		width: auto !important;
+	&__line {
+		width: 60vw;
+		height: 40vh;
+		text-align: center;
+		margin: 2vh 2vw;
+
+		> svg {
+			width: 100% !important;
+			height: auto !important;
+		}
+	}
+
+	&__pie {
+		width: 30vw;
+		height: 40vh;
+		text-align: center;
+		margin: 2vh 2vw;
+
+		> svg {
+			width: 100% !important;
+			height: auto !important;
+		}
 	}
 }
