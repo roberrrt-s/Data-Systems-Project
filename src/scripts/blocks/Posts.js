@@ -5,7 +5,10 @@ import {
 	LineSeries,
 	TooltipArea,
 	PieChart,
-	PieArcSeries
+	PieArcSeries,
+	StackedNormalizedAreaSeries,
+	StackedNormalizedAreaChart,
+	BarChart
 } from 'reaviz';
 
 import ReactTable from "react-table";
@@ -14,9 +17,10 @@ import "react-table/react-table.css";
 
 class Posts extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
+			// Empty line data
 			allLineData: [{
 				key: "All posts",
 				data: []
@@ -25,6 +29,7 @@ class Posts extends Component {
 				key: "Hate posts",
 				data: []
 			}],
+			// Empty pie data
 			allPieData: [{
 				key: "Not hateful",
 				data: 0
@@ -32,6 +37,21 @@ class Posts extends Component {
 			{
 				key: "Hateful",
 				data: 0
+			}],
+			// Empty bar data
+			allBarData: [],
+			// Empty line data for sentiment
+			allSentimentData: [{
+				key: "neg",
+				data: []
+			},
+			{
+				key: "ne",
+				data: []
+			},
+			{
+				key: "pos",
+				data: []
 			}],
 			columns: [{
 				Header: 'Date',
@@ -77,6 +97,13 @@ class Posts extends Component {
 					return content.row.hate ? 'hateful' : 'not hateful'
 				}
 			}]
+		};
+
+		// Bar Chart data
+		for (let key in this.props.user.user_topic) {
+			this.state.allBarData.push(
+				{key: key, data: this.props.user.user_topic[key]}
+			)
 		}
 
 		this.props.user.posts.map(el => {
@@ -88,33 +115,57 @@ class Posts extends Component {
 				{
 					key: new Date(year, month)
 				}
-			)
+			);
 
 			if(el.hate) {
 				this.state.allLineData[1].data.push(
 					{
 						key: new Date(year, month)
 					}
-				)
+				);
 
 				this.state.allPieData[1].data++
 			}
-		})
+			// Line chart sentiment
+			// Adding the negative sentiment values
+			this.state.allSentimentData[0].data.push(
+				{
+					key: date, data: el.post_sentiment["neg"]
+				}
+			);
+			// Adding the neutral sentiment values
+			this.state.allSentimentData[1].data.push(
+				{
+					key: date, data: el.post_sentiment["ne"]
+				}
+			);
+			// Adding the positive sentiment values
+			this.state.allSentimentData[2].data.push(
+				{
+					key: date, data: el.post_sentiment["pos"]
+				}
+			)
+		});
 
-		this.state.allPieData[0].data = (this.props.user.posts.length + 1) - this.state.allPieData[1].data
+		this.state.allPieData[0].data = (this.props.user.posts.length + 1) - this.state.allPieData[1].data;
 
 		this.state.allLineData[0].data = this.mergeObjects(this.state.allLineData[0].data);
 		this.state.allLineData[1].data = this.mergeObjects(this.state.allLineData[1].data);
 		this.state.allLineData[1].data = this.addMissingDates(this.state.allLineData[0].data, this.state.allLineData[1].data);
-
+		// Sorting Line Data
 		this.state.allLineData[0].data = this.sortObjects(this.state.allLineData[0].data);
 		this.state.allLineData[1].data = this.sortObjects(this.state.allLineData[1].data);
+		// Sorting Sentiment data
+		this.state.allSentimentData[0].data = this.sortObjects(this.state.allSentimentData[0].data);
+		this.state.allSentimentData[1].data = this.sortObjects(this.state.allSentimentData[1].data);
+		this.state.allSentimentData[2].data = this.sortObjects(this.state.allSentimentData[2].data);
+
 	}
 
 
 	mergeObjects(arr) {
 		return arr.reduce((acc, item) => {
-			let found = acc.find(obj => obj.key.toString() === item.key.toString())
+			let found = acc.find(obj => obj.key.toString() === item.key.toString());
 				if (typeof found === "undefined") {
 					item.data = 1
 					acc.push(item);
@@ -142,7 +193,7 @@ class Posts extends Component {
 						data: 0
 					})
 				}
-			})
+			});
 			return missing;
 		} else {
 			return missing;
@@ -181,6 +232,28 @@ class Posts extends Component {
 							}
 						/>
 					</div>
+					<div>
+						<BarChart
+							height={300}
+							width={300}
+							data={this.state.allBarData}
+						/>
+					</div>
+					<div className="b-chart__line">
+						<StackedNormalizedAreaChart
+							data={this.state.allSentimentData}
+							discrete={true}
+							series={
+								<StackedNormalizedAreaSeries
+									colorScheme={["#78dce8", "#fc9867", "#fc0303"]}
+									tooltip={
+										<TooltipArea disabled={true} />
+									}
+								/>
+							}
+						/>
+					</div>
+
 				</div>
 				<ReactTable
 					showPagination={true}
@@ -201,4 +274,4 @@ export default Posts;
 
 Posts.propTypes = {
 	user: PropTypes.object
-}
+};
