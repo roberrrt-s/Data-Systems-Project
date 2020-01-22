@@ -55,6 +55,20 @@ a {
 	flex-flow: row wrap;
 }
 
+.is-topic {
+	display: block;
+	float: left;
+
+	&:not(:last-of-type)::after {
+		content: ',';
+		padding-right: 0.3em;
+	}
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
 .ReactTable .rt-td.is-content {
 	white-space: normal;
 }

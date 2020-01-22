@@ -8,21 +8,11 @@ class Home extends Component {
 		super();
 	}
 
+	componentDidMount() {
+		window.scrollTo(0, 0)
+	}
+
 	render() {
-		console.log(this.props.data)
-
-		const content = this.props.data.length ? (
-			this.props.data.map((el, i) => {
-				return (
-				<div key={i}>
-					<p><Link to={`/user/${el.user_id}`}>ID: {el.user_id}</Link> <br /> Name: {el.user_name} <br /> Posts: {el.post_count} </p>
-				</div>
-				)
-			})
-		) : (
-			<p>Loading...</p>
-		)
-
 		return (
 			<main id="home">
 				<div className="jumbotron">
@@ -34,8 +24,9 @@ class Home extends Component {
 						negativity, hatefulness and topics of single users or groups
 						of users in right-wing extremist forums.
 						Based on the Fascist Data Explorer behaviour of users can
-						be tracked and analysed by experts.</p>
-					<button type="button" className="btn btn-primary">Start exploring</button>
+						be tracked and analysed by experts. <br /><br />
+						<Link to="/overview"><button type="button" className="btn btn-primary">Start exploring</button></Link>
+					</p>
 				</div>
 
 				<div className="container-fluid">
@@ -61,9 +52,17 @@ class Home extends Component {
 
 				<div className="container-fluid">
 					<h1>Sentiment Analysis</h1>
-					<h2>Positive <span className="badge badge-secondary">12%</span></h2>
-					<h2>Neutral <span className="badge badge-secondary">78%</span></h2>
-					<h2>Negative <span className="badge badge-secondary">10%</span></h2>
+					<div className="progress">
+						<div className="progress-bar" role="progressbar" style={{width:"12%", backgroundColor: "#a9dc76"}}>
+						Positive (12%)
+						</div>
+						<div className="progress-bar" role="progressbar" style={{width:"78%", backgroundColor: "#fc9867"}}>
+						Neutral (78%)
+						</div>
+						<div className="progress-bar" role="progressbar" style={{width:"10%", backgroundColor: "#ff6188"}}>
+						Negative (10%)
+						</div>
+					</div>
 					<p>The sentiment analysis is based on a pre-trained model from the NLTK-library in
 						python.
 						The sentiment model is used to sort out all non-English posts and evaluate the

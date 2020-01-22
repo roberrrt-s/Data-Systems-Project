@@ -1,6 +1,7 @@
 {
   "name": "data-explorer",
   "version": "0.1.0",
+  "homepage": "/uva/dsp/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.7.4",

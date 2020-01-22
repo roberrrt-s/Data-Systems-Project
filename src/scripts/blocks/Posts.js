@@ -58,6 +58,7 @@ class Posts extends Component {
 				Header: 'Date',
 				accessor: 'post_date',
 				show: true,
+				width: 300,
 				sortable: true,
 				filterable: true,
 				Cell: content => {
@@ -92,6 +93,7 @@ class Posts extends Component {
 				Header: 'Hateful?',
 				accessor: 'hate',
 				show: true,
+				width: 100,
 				sortable: true,
 				filterable: true,
 				Cell: content => {
@@ -131,19 +133,19 @@ class Posts extends Component {
 			// Adding the negative sentiment values
 			this.state.allSentimentData[0].data.push(
 				{
-					key: date, data: el.post_sentiment["neg"]
+					key: new Date(year, month), data: el.post_sentiment["neg"]
 				}
 			);
 			// Adding the neutral sentiment values
 			this.state.allSentimentData[1].data.push(
 				{
-					key: date, data: el.post_sentiment["ne"]
+					key: new Date(year, month), data: el.post_sentiment["ne"]
 				}
 			);
 			// Adding the positive sentiment values
 			this.state.allSentimentData[2].data.push(
 				{
-					key: date, data: el.post_sentiment["pos"]
+					key: new Date(year, month), data: el.post_sentiment["pos"]
 				}
 			)
 		});
@@ -204,10 +206,10 @@ class Posts extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<h2>Overview for user {this.props.user.user_name} ({this.props.user.user_id})</h2>
+				<h4>Overview for user {this.props.user.user_name} ({this.props.user.user_id})</h4>
 				<div className="b-chart">
 					<div className="b-chart__line">
-						<h4>Posts by user over time and hateful posts over time</h4>
+						<h5>Posts by user over time and hateful posts over time</h5>
 						<LineChart
 							data={this.state.allLineData}
 							discrete={true}
@@ -215,29 +217,29 @@ class Posts extends Component {
 								<LineSeries
 									type="grouped"
 									colorScheme={["#78dce8", "#fc9867"]}
-									tooltip={
-										<TooltipArea disabled={true} />
-									}
+									// tooltip={
+									// 	<TooltipArea disabled={true} />
+									// }
 								/>
 							}
 						/>
 					</div>
 					<div className="b-chart__pie">
-						<h4>Percentage of hateful posts</h4>
+						<h5>Percentage of hateful posts</h5>
 						<PieChart
 							data={this.state.allPieData}
 							series={
 								<PieArcSeries
 									colorScheme={["#78dce8", "#fc9867"]}
-									tooltip={
-										<TooltipArea disabled={true} />
-									}
+									// tooltip={
+									// 	<TooltipArea disabled={true} />
+									// }
 								/>
 							}
 						/>
 					</div>
 					<div className="b-chart__pie">
-						<h4>Occurance of topics in posts</h4>
+						<h5>Occurance of topics in posts</h5>
 						<BarChart
 							data={this.state.allBarData}
 							series={
@@ -248,16 +250,16 @@ class Posts extends Component {
 						/>
 					</div>
 					<div className="b-chart__line">
-						<h4>Post sentiment over time</h4>
+						<h5>Post sentiment over time</h5>
 						<StackedNormalizedAreaChart
 							data={this.state.allSentimentData}
 							discrete={true}
 							series={
 								<StackedNormalizedAreaSeries
-									colorScheme={["#78dce8", "#fc9867", "#fc0303"]}
-									tooltip={
-										<TooltipArea disabled={true} />
-									}
+									colorScheme={[ "#fc0303","#fc9867","#78dce8"]}
+									// tooltip={
+									// 	<TooltipArea disabled={true} />
+									// }
 								/>
 							}
 						/>

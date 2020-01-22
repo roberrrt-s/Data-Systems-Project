@@ -8,9 +8,23 @@
 		padding-bottom: $grid-gutter-width / 2;
 		overflow: hidden;
 
-		&#home {
-			max-width: 40rem;
+		&#home > div:not(.jumbotron) {
+			display: flex;
+			flex-flow: column nowrap;
+			max-width: 45rem;
+			margin-bottom: 2rem;
 		}
 
+		.jumbotron > * {
+			max-width: 45rem;
+			margin-left: auto;
+			margin-right: auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		.badge-secondary {
+			background-color: $m-blue;
+		}
 	}
 }
