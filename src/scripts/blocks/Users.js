@@ -40,7 +40,7 @@ class Users extends Component {
 				Header: 'Postcount',
 				accessor: 'post_count',
 				show: true,
-				width: 75,
+				width: 150,
 				sortable: true,
 				filterable: false,
 			},
@@ -48,7 +48,7 @@ class Users extends Component {
 				Header: 'Percentage of hateful posts',
 				accessor: 'percentage_hate',
 				show: true,
-				width: 75,
+				width: 150,
 				sortable: true,
 				filterable: false,
 				Cell: content => {
