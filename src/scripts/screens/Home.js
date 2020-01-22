@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import {
+	PieChart,
+	PieArcSeries
+} from 'reaviz'
+
 class Home extends Component {
 
 	constructor() {
@@ -52,17 +57,31 @@ class Home extends Component {
 
 				<div className="container-fluid">
 					<h1>Sentiment Analysis</h1>
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" style={{width:"12%", backgroundColor: "#a9dc76"}}>
-						Positive (12%)
-						</div>
-						<div className="progress-bar" role="progressbar" style={{width:"78%", backgroundColor: "#fc9867"}}>
-						Neutral (78%)
-						</div>
-						<div className="progress-bar" role="progressbar" style={{width:"10%", backgroundColor: "#ff6188"}}>
-						Negative (10%)
-						</div>
-					</div>
+					<PieChart
+						height={400}
+						data={[
+								{
+									key: "Positive",
+									data: 12
+								},
+								{
+									key: "Neutral",
+									data: 78
+								},
+								{
+									key: "Negative",
+									data: 10
+								}
+							]}
+						series={
+							<PieArcSeries
+								colorScheme={["#a9dc76", "#fc9867", "#ff6188"]}
+								// tooltip={
+								// 	<TooltipArea disabled={true} />
+								// }
+							/>
+						}
+					/>
 					<p>The sentiment analysis is based on a pre-trained model from the NLTK-library in
 						python.
 						The sentiment model is used to sort out all non-English posts and evaluate the

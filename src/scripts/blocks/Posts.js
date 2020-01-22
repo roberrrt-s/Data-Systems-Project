@@ -244,7 +244,7 @@ class Posts extends Component {
 							data={this.state.allBarData}
 							series={
 								<BarSeries
-									colorScheme={["#ff6188", "#fc9867", "#ffd866", "#a9dc76", "78dce8", "ab9df2"]}
+									colorScheme={["#ff6188", "#fc9867", "#ffd866", "#a9dc76", "#78dce8", "#ab9df2"]}
 								/>
 							}
 						/>
