@@ -207,6 +207,7 @@ class Posts extends Component {
 				<h2>Overview for user {this.props.user.user_name} ({this.props.user.user_id})</h2>
 				<div className="b-chart">
 					<div className="b-chart__line">
+						<h4>Posts by user over time and hateful posts over time</h4>
 						<LineChart
 							data={this.state.allLineData}
 							discrete={true}
@@ -222,6 +223,7 @@ class Posts extends Component {
 						/>
 					</div>
 					<div className="b-chart__pie">
+						<h4>Percentage of hateful posts</h4>
 						<PieChart
 							data={this.state.allPieData}
 							series={
@@ -235,6 +237,7 @@ class Posts extends Component {
 						/>
 					</div>
 					<div className="b-chart__pie">
+						<h4>Occurance of topics in posts</h4>
 						<BarChart
 							data={this.state.allBarData}
 							series={
@@ -245,6 +248,7 @@ class Posts extends Component {
 						/>
 					</div>
 					<div className="b-chart__line">
+						<h4>Post sentiment over time</h4>
 						<StackedNormalizedAreaChart
 							data={this.state.allSentimentData}
 							discrete={true}

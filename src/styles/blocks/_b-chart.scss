@@ -4,10 +4,12 @@
 	padding: 5vh 0;
 
 	&__line {
-		width: 60vw;
+		display: flex;
+		flex-flow: column nowrap;
+		margin-bottom: 1rem;
+
+		width: 65%;
 		height: 35vh;
-		text-align: center;
-		margin: 2vh 2vw;
 
 		> svg {
 			width: 100% !important;
@@ -16,14 +18,20 @@
 	}
 
 	&__pie {
-		width: 30vw;
+		display: flex;
+		flex-flow: column nowrap;
+		margin-bottom: 1rem;
+
+		width: 35%;
 		height: 35vh;
-		text-align: center;
-		margin: 2vh 2vw;
 
 		> svg {
 			width: 100% !important;
 			height: auto !important;
 		}
+	}
+
+	h4 {
+		margin-bottom: 1rem;
 	}
 }

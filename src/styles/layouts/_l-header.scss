@@ -1,7 +1,7 @@
 .l-header {
 	@include make-row();
 
-	background-color: $m-red;
+	background-color: $dark;
 	min-height: $header-min-height;
 	height: $header-height;
 }
