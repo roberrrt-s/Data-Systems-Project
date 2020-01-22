@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
 	LineChart,
 	LineSeries,
-	TooltipArea,
 	PieChart,
 	PieArcSeries,
 	StackedNormalizedAreaSeries,
@@ -217,9 +216,6 @@ class Posts extends Component {
 								<LineSeries
 									type="grouped"
 									colorScheme={["#78dce8", "#fc9867"]}
-									// tooltip={
-									// 	<TooltipArea disabled={true} />
-									// }
 								/>
 							}
 						/>
@@ -231,9 +227,6 @@ class Posts extends Component {
 							series={
 								<PieArcSeries
 									colorScheme={["#78dce8", "#fc9867"]}
-									// tooltip={
-									// 	<TooltipArea disabled={true} />
-									// }
 								/>
 							}
 						/>
@@ -257,9 +250,6 @@ class Posts extends Component {
 							series={
 								<StackedNormalizedAreaSeries
 									colorScheme={[ "#fc0303","#fc9867","#78dce8"]}
-									// tooltip={
-									// 	<TooltipArea disabled={true} />
-									// }
 								/>
 							}
 						/>
