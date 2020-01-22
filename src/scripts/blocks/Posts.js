@@ -8,7 +8,8 @@ import {
 	PieArcSeries,
 	StackedNormalizedAreaSeries,
 	StackedNormalizedAreaChart,
-	BarChart
+	BarChart,
+	BarSeries
 } from 'reaviz';
 
 import ReactTable from "react-table";
@@ -42,15 +43,15 @@ class Posts extends Component {
 			allBarData: [],
 			// Empty line data for sentiment
 			allSentimentData: [{
-				key: "neg",
+				key: "Negative percentage",
 				data: []
 			},
 			{
-				key: "ne",
+				key: "Neutral percentage",
 				data: []
 			},
 			{
-				key: "pos",
+				key: "Positive percentage",
 				data: []
 			}],
 			columns: [{
@@ -203,6 +204,7 @@ class Posts extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<h2>Overview for user {this.props.user.user_name} ({this.props.user.user_id})</h2>
 				<div className="b-chart">
 					<div className="b-chart__line">
 						<LineChart
@@ -232,11 +234,14 @@ class Posts extends Component {
 							}
 						/>
 					</div>
-					<div>
+					<div className="b-chart__pie">
 						<BarChart
-							height={300}
-							width={300}
 							data={this.state.allBarData}
+							series={
+								<BarSeries
+									colorScheme={["#ff6188", "#fc9867", "#ffd866", "#a9dc76", "78dce8", "ab9df2"]}
+								/>
+							}
 						/>
 					</div>
 					<div className="b-chart__line">
@@ -255,6 +260,9 @@ class Posts extends Component {
 					</div>
 
 				</div>
+
+				<h2>List of all posts by user {this.props.user.user_name} ({this.props.user.user_id})</h2>
+
 				<ReactTable
 					showPagination={true}
 					data={this.props.user.posts}

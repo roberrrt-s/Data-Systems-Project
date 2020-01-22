@@ -5,7 +5,6 @@
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
-	justify-content: center;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -14,10 +13,26 @@
 	h1 {
 		color: $white;
 		font-size: 1.5rem;
+		padding-left: 1.5rem;
+	}
+
+	ul,
+	li {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	ul {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		height: 100%;
+		margin-left: auto;
+		margin-right: 1.5rem;
 	}
 
 	&__item {
-
 		a {
 			display: flex;
 			flex-flow: column nowrap;
@@ -25,11 +40,9 @@
 			justify-content: center;
 			height: 100%;
 			color: $light;
-			padding: ($grid-gutter-width / 2) $grid-gutter-width ($grid-gutter-width / 2) ($grid-gutter-width / 2);
 
-			&.active {
-				color: $white;
-				font-weight: 700;
+			&.is-active {
+				display: none;
 			}
 
 			@include hover-focus {

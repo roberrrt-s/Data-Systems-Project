@@ -1,10 +1,11 @@
 .b-chart {
 	display: flex;
 	flex-flow: row wrap;
+	padding: 5vh 0;
 
 	&__line {
 		width: 60vw;
-		height: 40vh;
+		height: 35vh;
 		text-align: center;
 		margin: 2vh 2vw;
 
@@ -16,7 +17,7 @@
 
 	&__pie {
 		width: 30vw;
-		height: 40vh;
+		height: 35vh;
 		text-align: center;
 		margin: 2vh 2vw;
 
